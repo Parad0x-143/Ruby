@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 nav{
@@ -16,27 +21,50 @@ nav{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  right: 0;
-  left: 0;
-  z-index: 999;
+  z-index: 1;
 }
 
 nav p {
   font-size: 25px;
   font-weight: 700;
+  user-select: none; 
 }
 
-nav .menu {
-  font-size: 30px;
+.menu {
+  transition: 0.5s;
+}
+
+nav .menu .menu-button-bars {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  height: 4px;
+  width:25px;
+  background-color: black;
+  margin: 2px;
+  border-radius: 5px;
+  transition: opacity .3s ease-in-out;
+  transition: transform .5s;
+}
+
+nav .menu.active .menu-button-bars:nth-child(1) {
+  opacity: 0;
+}
+
+nav .menu.active .menu-button-bars:nth-child(3) {
+  transform: rotate(45deg);
+}
+
+nav .menu.active .menu-button-bars:nth-child(2) {
+  transform: rotate(-45deg) translateY(4px) translateX(-4px);
+}
+
+nav .menu.active {
+  transform: translateY(-9px);
 }
 
 .main {
   padding: 20px;
 }
-
 .main h3 {
   font-size: 30px;
 }
@@ -51,7 +79,7 @@ nav .menu {
 
 .main p {
   font-size: 20px;
-  font-weight: bod;
+  font-weight: bold;
 }
 
 .sketches {
@@ -61,7 +89,6 @@ nav .menu {
   margin-top: 20px;
   flex-direction: column;
   gap: 30px;
-  margin-bottom: 50px;
 }
 
 .sketches .items {
@@ -71,7 +98,6 @@ nav .menu {
   padding: 20px 20px 25px;
   gap: 15px;
   border-radius: 30px;
-  boder: 2px solid black;
   transition: all .3s ease-in-out;
 }
 
@@ -90,27 +116,13 @@ nav .menu {
 }
 
 .sketches .items:hover img {
-  border-radius: 15px
-  object-position: contain;
+  border-radius: 15px;
   transform: scale(1.05);
   transition: transform .3s ease-in-out;
 }
 
 .sketches .items h3 {
   max-width: 250px
-}
-
-.btn {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
 }
 
 .sketch {
@@ -120,6 +132,7 @@ nav .menu {
   margin-top: 20px;
   flex-direction: column;
   gap: 30px;
+  transition: display 0.5s ease-in-out;
 }
 
 .sketch .item {
@@ -147,8 +160,8 @@ nav .menu {
 }
 
 .sketch .item:hover img {
-  object-position: contain;
   transform: scale(1.05);
+  border-radius: 15px;
   transition: transform .3s ease-in-out;
 }
 
@@ -179,7 +192,6 @@ footer {
   width: 100%;
   padding: 20px;
   background-color: #D5DEEF;
-  transform: translateY(100px);
 }
 
 footer .footer-content a {
@@ -189,4 +201,68 @@ footer .footer-content a {
 footer .footer-content i {
   font-size: 25px;
   transform: translateY(4px);
-  }
+}
+
+.sidebar-container {
+  background-color: blck;
+  width: 160px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-left: 10px;
+  position: fixed;
+  right: 0;
+  z-index: 1;
+}
+
+.sidebar,
+.sidebar2,
+.sidebar3 {
+  background-color: #D5DEEF;;
+  width: 140px;
+  height: 50px;
+  transition: 0.5s;
+  transition-delay: calc(50ms * var(--i));
+  border-radius: 20px;
+  transform: translateX(160px);
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  pointer-events: none;
+  font-weight: bold;
+}
+
+.sidebar.active,
+.sidebar2.active,
+.sidebar3.active {
+  transform: translateX(5px)
+}
+
+.turnoff {
+  -webkit-filter: blr(5px);
+  -moz-filter: blr(5px);
+  -o-filter: blr(5px);    
+  -ms-filter: bur(5px);
+  filter: blur(5px);
+  pointer-events: none;
+  transition: all 0.1s;
+  user-select: none;
+}
+
+.on {
+  transition: all 0.1s;
+}
+
+.revert-btn i {
+  color: #D5DEEF;
+  background-color: black;
+  border-radius: 50%;
+  font-size: 45px;
+  dislay: none;
+  position: fixed;
+  right: 16px;
+  bottom: 15px;
+}
