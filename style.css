@@ -203,6 +203,10 @@ footer .footer-content i {
   transform: translateY(4px);
 }
 
+footer h3 a { 
+  color: #636363
+}
+
 .sidebar-container {
   background-color: blck;
   width: 160px;
